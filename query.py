@@ -17,7 +17,7 @@ def retrieve_chunks(query_embedding: list, top_k: int=5) -> list:
     collection = chroma.get_collection(name="docmind")
     results = collection.query(
         query_embeddings=[query_embedding],
-        n_results=min(top_k, len(collection)),
+        n_results=min(top_k, collection.count()),
     )
     return results["documents"][0]
 
@@ -31,3 +31,22 @@ def build_prompt(chunks: list, question: str) -> str:
         f"Answer:"
     )
     return prompt
+
+def ask(question: str) -> str:
+    embed_question = embed_query(question)
+    chunks = retrieve_chunks(embed_question)
+    prompt = build_prompt(chunks, question)
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    answer = response.choices[0].message.content
+    print(f"\nAnswer: {answer}")
+    return answer
+
+if __name__ == "__main__":
+    while True:
+        question = input("\nAsk a question (or 'quit'): ")
+        if(question.lower() == "quit"):
+            break
+        ask(question)
