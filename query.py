@@ -20,3 +20,14 @@ def retrieve_chunks(query_embedding: list, top_k: int=5) -> list:
         n_results=min(top_k, len(collection)),
     )
     return results["documents"][0]
+
+def build_prompt(chunks: list, question: str) -> str:
+    context = "\n\n---\n\n".join(chunks)
+    prompt = (
+        f"You are a helpful assistant. Answer the question using ONLY the context below.\n"
+        f"If the answer is not in the context, say 'I don't have enough information to answer that.'\n\n"
+        f"Context:\n{context}\n\n"
+        f"Question: {question}\n\n"
+        f"Answer:"
+    )
+    return prompt
