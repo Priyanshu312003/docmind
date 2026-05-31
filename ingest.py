@@ -1,4 +1,5 @@
 import fitz
+import chromadb
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -33,3 +34,17 @@ def embed_texts(chunks: list) -> list:
     for item in response.data:
         embeddings.append(item.embedding)
     return embeddings
+
+def store_chunks(chunks: list, embeddings: list):
+        chroma = chromadb.PersistentClient(path="./chroma_store")
+        try:
+            chroma.delete_collection(name="docmind")
+        except:
+            pass
+        collection = chroma.get_or_create_collection(name="docmind")
+        collection.add(
+            ids=[f"chunk_{i}" for i in range(len(chunks))],
+            documents=chunks,
+            embeddings=embeddings
+        )
+        print(f"Number of chunks stored: {len(chunks)}")
