@@ -48,3 +48,12 @@ def store_chunks(chunks: list, embeddings: list):
             embeddings=embeddings
         )
         print(f"Number of chunks stored: {len(chunks)}")
+        
+if __name__ == "__main__":
+    text = load_pdf("data/rag_concepts.pdf")
+    print("PDF loaded successfully.")
+    chunks = chunk_text(text)
+    print("Text chunked successfully.")
+    embeddings = embed_texts(chunks)
+    store_chunks(chunks, embeddings)
+    print("Chunks and embeddings stored successfully.")
