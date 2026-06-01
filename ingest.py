@@ -14,7 +14,7 @@ def load_pdf(path: str) -> str:
         full_text += text
     return full_text
 
-def chunk_text(text: str, chunk_size: int =500, overlap: int = 50) ->list:
+def chunk_text(text: str, chunk_size: int =250, overlap: int = 40) ->list:
     chunks = []
     words = text.split()
     i = 0

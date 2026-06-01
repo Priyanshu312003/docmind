@@ -25,7 +25,7 @@ def build_prompt(chunks: list, question: str) -> str:
     context = "\n\n---\n\n".join(chunks)
     prompt = (
         f"You are a helpful assistant. Answer the question using ONLY the context below.\n"
-        f"If the answer is not in the context, say 'I don't have enough information to answer that.'\n\n"
+        f"If the answer is partially in the context, use what is available. Only say 'I don't have enough information' if there is truly nothing relevant.\n\n"
         f"Context:\n{context}\n\n"
         f"Question: {question}\n\n"
         f"Answer:"
