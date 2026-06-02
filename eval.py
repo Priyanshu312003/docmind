@@ -5,7 +5,7 @@ eval_set = [
     },
     {
         "question": "What are the two phases of RAG?",
-        "expected": "Ingestion and Retrieval"
+        "expected": "Ingestion, Offline, Retrieval, Generation"
     },
     {
         "question":"explain chunking",
@@ -17,7 +17,7 @@ eval_set = [
     },
     {
         "question":"What is cosine similarity?",
-        "expected":"angle between two vectors"
+        "expected":"cosine, angle, vectors"
     },
     {
         "question":"What is FAISS?",
