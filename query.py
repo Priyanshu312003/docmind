@@ -47,6 +47,12 @@ def ask(question: str) -> str:
     )
     answer = response.choices[0].message.content
     print(f"\nAnswer: {answer}")
+    
+    #citations
+    print("\n--- Sources ---")
+    for i, chunk in enumerate(chunks):
+        print(f"\nSource {i+1}: {chunk[:200]}...")
+        
     return answer
 
 def rerank_chunks(query: str, chunks: list, top_n: int=3) -> list:
