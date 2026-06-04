@@ -53,7 +53,7 @@ def ask(question: str) -> str:
     for i, chunk in enumerate(chunks):
         print(f"\nSource {i+1}: {chunk[:200]}...")
         
-    return answer
+    return answer, chunks
 
 def rerank_chunks(query: str, chunks: list, top_n: int=3) -> list:
     results=co.rerank(

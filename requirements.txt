@@ -3,3 +3,4 @@ chromadb
 pymupdf
 python-dotenv
 cohere
+streamlit
